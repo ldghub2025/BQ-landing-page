@@ -26,7 +26,6 @@ export function ForInvestors() {
     name: "",
     email: "",
     message: "",
-    company: "",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,16 +41,15 @@ export function ForInvestors() {
         body: JSON.stringify(formData),
       })
 
-      const data = await response.json()
-
-      if (data.success) {
+      if (response.ok) {
         toast({
-          title: "Thanks! We'll get back to you soon.",
+          title: "Message sent!",
+          description: "Thank you for reaching out. We'll get back to you soon.",
         })
-        setFormData({ name: "", email: "", message: "", company: "" })
+        setFormData({ name: "", email: "", message: "" })
         setOpen(false)
       } else {
-        throw new Error(data.error || "Failed to send message")
+        throw new Error("Failed to send message")
       }
     } catch (error) {
       toast({
@@ -121,15 +119,6 @@ export function ForInvestors() {
                   rows={5}
                 />
               </div>
-              <input
-                type="text"
-                name="company"
-                value={formData.company}
-                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                style={{ display: "none" }}
-                tabIndex={-1}
-                autoComplete="off"
-              />
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
