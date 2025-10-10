@@ -4,20 +4,21 @@ import { Card } from "@/components/ui/card"
 const features = [
   {
     icon: FileText,
-    title: "Before your visit",
+    title: "🗂️ Before your visit",
     description:
-      "Tell BetterQs what's going on — by talking, typing, or uploading your notes. It can also pull data from your fitness watch or health records. Workflows follow medical best practices for each specialist, helping you quickly understand your issue, get a short summary, and have clear questions ready for your visit.",
+      "Tell BetterQs what's going on — by talking, typing, or uploading your notes. It can also pull data from your fitness watch or health records if available. Workflows follow medical best practices for each specialist, helping you quickly understand your issue, get a short summary, and have clear questions ready for your visit.",
   },
   {
     icon: MessageSquare,
-    title: "During your visit",
+    title: "💬 During your visit",
     description:
       "Have a better, more focused conversation with your doctor using the summaries and questions prepared in advance. If your doctor consents, you can also record the visit so BetterQs can remember everything for you.",
   },
   {
     icon: ClipboardCheck,
-    title: "After your visit",
-    description: "Get an easy-to-read summary of what was discussed and what to do next.",
+    title: "🩺 After your visit",
+    description:
+      "Get an easy-to-read summary of what was discussed and what to do next. BetterQs can connect with medical professionals' notes through secure systems to keep everything up to date.",
   },
 ]
 
