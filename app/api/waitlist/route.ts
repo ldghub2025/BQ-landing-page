@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server"
+import { writeFile, readFile, mkdir } from "fs/promises"
+import { existsSync } from "fs"
+import path from "path"
 
 export async function POST(request: Request) {
   try {
@@ -8,14 +11,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 })
     }
 
-    // Log the waitlist signup
-    console.log("[v0] Waitlist signup:", email, new Date().toISOString())
+    const dataDir = path.join(process.cwd(), "data")
+    const csvPath = path.join(dataDir, "waitlist.csv")
 
-    // TODO: Store in database (Supabase, Airtable, etc.)
-    // Example: await supabase.from('waitlist').insert({ email, created_at: new Date() })
+    // Create data directory if it doesn't exist
+    if (!existsSync(dataDir)) {
+      await mkdir(dataDir, { recursive: true })
+    }
 
-    // TODO: Optional - Send confirmation email via Resend/SendGrid
-    // Example: await resend.emails.send({ to: email, subject: "Welcome to BetterQs!", ... })
+    // Create CSV with headers if it doesn't exist
+    if (!existsSync(csvPath)) {
+      await writeFile(csvPath, "email,timestamp\n", "utf-8")
+    }
+
+    // Read existing CSV content
+    const existingContent = await readFile(csvPath, "utf-8")
+
+    // Check if email already exists
+    if (existingContent.includes(email)) {
+      return NextResponse.json({ error: "Email already registered" }, { status: 400 })
+    }
+
+    // Append new entry
+    const timestamp = new Date().toISOString()
+    const newEntry = `${email},${timestamp}\n`
+    await writeFile(csvPath, existingContent + newEntry, "utf-8")
+
+    console.log("[v0] Waitlist signup saved to CSV:", email, timestamp)
 
     return NextResponse.json({ success: true, message: "Successfully joined waitlist" })
   } catch (error) {
