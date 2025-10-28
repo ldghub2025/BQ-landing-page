@@ -12,7 +12,7 @@ export function ForInvestors() {
           </p>
         </div>
         <a
-          href="mailto:investors@betterqs.com"
+          href="mailto:dmitriy@betterqs.com"
           className="inline-flex items-center justify-center h-14 px-8 text-base font-medium rounded-xl border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
         >
           Contact the Founders
