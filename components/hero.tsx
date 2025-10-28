@@ -1,21 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
 
 export function Hero() {
-  const handleJoinWaitlist = () => {
-    const waitlistSection = document.getElementById("waitlist")
-    const emailInput = document.getElementById("waitlist-email")
-
-    waitlistSection?.scrollIntoView({ behavior: "smooth" })
-
-    // Focus the email input after scroll animation completes
-    setTimeout(() => {
-      emailInput?.focus()
-    }, 500)
-  }
-
   return (
     <section className="relative overflow-hidden px-6 py-24 md:py-32 lg:py-40 pt-32 md:pt-40 lg:pt-48 bg-gradient-to-br from-background via-secondary/20 to-accent/10">
       <div className="mx-auto max-w-7xl">
@@ -29,14 +16,6 @@ export function Hero() {
               simple app.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Button
-                size="lg"
-                className="text-base px-8 py-6 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
-                onClick={handleJoinWaitlist}
-              >
-                Join the Waitlist
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
               <Button
                 size="lg"
                 variant="outline"
